@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { toggleFavorites } from '../actions/favoritesActions'
 
 const MovieHeader = (props) => {
-    const appTitle = "";
-    const displayFavorites = true;
+    const { appTitle, displayFavorites, toggleFavorites } = props;
     
     return(<div className="table-title">
         <div className="row">
@@ -19,4 +20,11 @@ const MovieHeader = (props) => {
     </div>);
 }
 
-export default MovieHeader;
+const mapStateToProps = (state) => {
+    return {
+        displayFavorites: state.favoriteReducer.displayFavorites,
+        appTitle: state.movieReducer.appTitle
+    }
+}
+
+export default connect(mapStateToProps,) (MovieHeader);
